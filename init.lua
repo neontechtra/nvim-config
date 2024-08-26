@@ -14,6 +14,9 @@ vim.opt.wrap = false
 vim.opt.expandtab = true
 vim.opt.tabstop = 4
 
+-- set shift width to 4 also
+vim.opt.shiftwidth = 4
+
 -- sync clipboards
 vim.opt.clipboard = "unnamedplus"
 -- keep cursor in the middle when scrolling
