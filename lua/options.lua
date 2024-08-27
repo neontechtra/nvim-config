@@ -34,3 +34,6 @@ vim.opt.ignorecase = true
 
 -- termguicolors
 vim.opt.termguicolors = true
+
+-- set the leader key to space
+vim.g.mapleader = " "
