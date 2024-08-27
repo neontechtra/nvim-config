@@ -70,7 +70,7 @@ require("lazy").setup({
                       -- mapping query_strings to modes.
                       selection_modes = {
                         ['@parameter.outer'] = 'v', -- charwise
-                        ['@function.outer'] = 'V', -- linewise
+                        ['@function.outer'] = 'v', -- linewise
                         ['@class.outer'] = '<c-v>', -- blockwise
                       },
                       -- If you set this to `true` (default is `false`) then any textobject is
@@ -90,6 +90,14 @@ require("lazy").setup({
     },
     {
         "nvim-treesitter/nvim-treesitter-textobjects",
+    },
+    { 
+        "neovim/nvim-lspconfig",
+        config = function()
+            local lspconfig = require("lspconfig")
+            lspconfig.clangd.setup({})
+            lspconfig.pyright.setup({})
+        end,
     },
 })
 

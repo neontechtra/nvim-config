@@ -14,3 +14,9 @@ should fire everything up but just some basic tweaks and colours added thus far
 
 lua/ folder is needed based on nvim design, so that using `nvim` anywhere will appropriately load the files
 
+### LSP Info
+
+will need clangd for C
+```
+sudo apt update && sudo apt install clangd
+```
