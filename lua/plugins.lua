@@ -88,6 +88,61 @@ require("lazy").setup({
             })
       end,
     },
+       {
+        "hrsh7th/nvim-cmp",
+        dependencies = {
+            "hrsh7th/cmp-nvim-lsp",   -- LSP source for nvim-cmp
+            "hrsh7th/cmp-buffer",     -- Buffer source for nvim-cmp
+            "hrsh7th/cmp-path",       -- Path source for nvim-cmp
+            "hrsh7th/cmp-cmdline",    -- Command line source for nvim-cmp
+            "L3MON4D3/LuaSnip",       -- Snippet engine
+            "saadparwaiz1/cmp_luasnip" -- Snippet completion source
+        },
+        config = function()
+            local cmp = require("cmp")
+            local luasnip = require("luasnip")
+
+            cmp.setup({
+                snippet = {
+                    expand = function(args)
+                        luasnip.lsp_expand(args.body) -- For LuaSnip users
+                    end,
+                },
+                mapping = cmp.mapping.preset.insert({
+                    ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+                    ["<C-f>"] = cmp.mapping.scroll_docs(4),
+                    ["<C-e>"] = cmp.mapping.close(),
+                    ["<C-y>"] = cmp.mapping.confirm ({
+                        behavior = cmp.ConfirmBehavior.Insert,
+                        
+                        select = true,
+                    }),
+                    ["<C-space>"] = cmp.mapping.complete(),
+                }),
+                sources = cmp.config.sources({
+                    { name = "nvim_lsp" },
+                    { name = "luasnip" },
+                }, {
+                    { name = "buffer" },
+                    { name = "path" },
+                })
+            })
+
+            -- Enable `/` and `:` autocomplete for search and command mode
+            cmp.setup.cmdline({ "/", "?" }, {
+                mapping = cmp.mapping.preset.cmdline(),
+                sources = { { name = "buffer" } }
+            })
+            cmp.setup.cmdline(":", {
+                mapping = cmp.mapping.preset.cmdline(),
+                sources = cmp.config.sources({
+                    { name = "path" }
+                }, {
+                    { name = "cmdline" }
+                })
+            })
+        end,
+    },
     {
         "nvim-treesitter/nvim-treesitter-textobjects",
     },
