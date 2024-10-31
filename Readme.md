@@ -20,3 +20,5 @@ will need clangd for C
 ```
 sudo apt update && sudo apt install clangd
 ```
+
+you can use npm for python, bit heavy but it works -- may need to add npm bin -g or npm root -g path to PATH
