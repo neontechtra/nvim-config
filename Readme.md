@@ -15,16 +15,7 @@ should fire everything up but just some basic tweaks and colours added thus far
 lua/ folder is needed based on nvim design, so that using `nvim` anywhere will appropriately load the files
 
 ### LSP Info
-
-will need clangd for C
-```
-sudo apt update && sudo apt install clangd
-```
-
-you can use npm for python, bit heavy but it works -- may need to add npm bin -g or npm root -g path to PATH
-
-### GPT on how the cmp complete works
-
+Updated to use mason, comments should help explain whats going on, any issues can be googled/youtube
 
 #### Key Mappings Explained
 

@@ -114,7 +114,6 @@ require("lazy").setup({
                     ["<C-e>"] = cmp.mapping.close(),
                     ["<C-y>"] = cmp.mapping.confirm ({
                         behavior = cmp.ConfirmBehavior.Insert,
-                        
                         select = true,
                     }),
                     ["<C-space>"] = cmp.mapping.complete(),
@@ -146,14 +145,35 @@ require("lazy").setup({
     {
         "nvim-treesitter/nvim-treesitter-textobjects",
     },
+    -- connect language servers to mason 
     { 
         "neovim/nvim-lspconfig",
-        config = function()
-            local lspconfig = require("lspconfig")
-            lspconfig.clangd.setup({})
-            lspconfig.pyright.setup({})
-        end,
+   },
+    -- Fixes issues with mason lsp config
+    {
+    "williamboman/mason-lspconfig.nvim",
+    dependencies = { "mason.nvim" },
+    config = function()
+        require("mason").setup()
+        require("mason-lspconfig").setup_handlers({
+            function(server_name)
+                require("lspconfig")[server_name].setup({})
+            end,
+        })
+    end,
     },
+   -- mason install
+   {
+    "williamboman/mason.nvim",
+    config = function()
+        require("mason").setup()
+    end,
+   },
+-- telescope install
+    {
+    'nvim-telescope/telescope.nvim', tag = '0.1.8',
+      dependencies = { 'nvim-lua/plenary.nvim' }
+   }
 })
 
 -- end of plugin setup
